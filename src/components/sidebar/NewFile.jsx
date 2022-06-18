@@ -35,6 +35,7 @@ const NewFile = () => {
     const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
     const [file, setFile] = useState({})
+  const [fileUrl, setFileUrl] = useState('')
     const [uploading, setUploading] = useState(false)
     const [fileDetails, setFileDetails] = React.useState({
         fileName: "",
@@ -61,7 +62,29 @@ const NewFile = () => {
 
     const handleUpload = () => {
         setUploading(true)
-        const tx = await uploads(filehash,filesize,fileType,fileName,fileDescription,false)
+        try {
+            const added = await ipfs.add(file)
+            
+            const url = `https://ipfs.infura.io/ipfs/${added.path}`
+            const hash=  (added.path).toString()
+            const name= (file.name.substr(0, file.name.lastIndexOf("."))).toString()
+          
+            const size = (file.size).toString()
+           // const ftype=(file.type).toString()
+           const ftype= (file.name.split('.').pop()).toString()
+           
+              await uploads(hash, size, ftype, name,description, false)
+            
+            //setUrl(url)
+            setFileUrl(url)
+           
+          
+            setUploaded(true)
+          
+            
+        } catch (err) {
+            console.log('Error uploading the file : ', err)}
+        
 
         
     }
