@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react'
 import '../../styles/NewFile.css'
-import {create as ipfsHttpClient} from 'ipfs-http-client'
+ import {create as ipfsHttpClient} from 'ipfs-http-client'
 import { ethers } from "ethers";
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { ConnectContext } from "../../context/ConnectContext";
-const ipfs = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
+ const ipfs = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 function getModalStyle() {
     return {
@@ -35,8 +35,10 @@ const NewFile = () => {
     const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
     const [file, setFile] = useState({})
-  const [fileUrl, setFileUrl] = useState('')
-    const [uploading, setUploading] = useState(false)
+    const [fileUrl, setFileUrl] = useState('')
+      const [uploading, setUploading] = useState(false)
+      const[description, setdescription] =useState("")
+    
     const [fileDetails, setFileDetails] = React.useState({
         fileName: "",
         fileDescription: "", 
@@ -60,7 +62,7 @@ const NewFile = () => {
         }
     }
 
-    const handleUpload = () => {
+    const handleUpload = async() => {
         setUploading(true)
         try {
             const added = await ipfs.add(file)
@@ -79,7 +81,7 @@ const NewFile = () => {
             setFileUrl(url)
            
           
-            setUploaded(true)
+            setUploading(false)
           
             
         } catch (err) {
@@ -88,6 +90,7 @@ const NewFile = () => {
 
         
     }
+
 
     return (
         <div className='newFile'>
@@ -110,7 +113,7 @@ const NewFile = () => {
                         ) : (
                                 <>  
 
-                                    <input type='text' placeholder='FileName' name = 'fileName' onChange={(e) => setFileDetails({ ...fileDetails, fileName: e.target.value })} />
+                                    <input type='text' placeholder='File Description' name = 'file Description' value={description} onChange={(e)=>setdescription(e.target.value)} required/>
                                     <input type="file" onChange={handleChange} />
                                     <button onClick={handleUpload}>Upload</button>
                                 </>
