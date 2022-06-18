@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react'
 import '../../styles/NewFile.css'
-// import {create as ipfsHttpClient} from 'ipfs-http-client'
+import {create as ipfsHttpClient} from 'ipfs-http-client'
 import { ethers } from "ethers";
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { ConnectContext } from "../../context/ConnectContext";
-// const ipfs = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
+const ipfs = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 function getModalStyle() {
     return {
@@ -61,6 +61,7 @@ const NewFile = () => {
 
     const handleUpload = () => {
         setUploading(true)
+        const tx = await uploads(filehash,filesize,fileType,fileName,fileDescription,false)
 
         
     }
