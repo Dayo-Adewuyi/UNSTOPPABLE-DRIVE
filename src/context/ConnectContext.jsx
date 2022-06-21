@@ -29,11 +29,11 @@ const fetchPublic = async() => {
  }
 }
 
-const fetchAll = async(ID) => {
+const fetchAll = async() => {
   const contract = createEthereumContract();
   
  try {
-   const result =await contract.Allfiles(ID);
+   const result =await contract.fetchUserFiles();
   
   return result
   }
@@ -262,11 +262,11 @@ const unPauseContract = async() => {
  }
 }
 
-const shareFile = async(id,receiver, hash ) => {
+const shareFile = async(id, beneficiaries, hash ) => {
     const contract = createEthereumContract();
     
    try {
-     const  result =await contract.shareFile(id,receiver, hash);
+     const  result =await contract.shareFile(id, beneficiaries, hash);
     
     return result
     }

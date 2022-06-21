@@ -5,11 +5,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 
 import Example from "./Pages/Example";
+import { ConnectProvider } from "./context/ConnectContext";
 
 
 export default function App() {
   
   return (
+    <ConnectProvider>
     <Router>
      
       
@@ -34,6 +36,7 @@ export default function App() {
         </Routes>
      
     </Router>
+    </ConnectProvider>
   );
   
 }
