@@ -3,10 +3,17 @@
     padding: 10px 0;
     /* TRouBLe */
     border-radius: 0 100px 100px 0;
+   
 }
 
+
+.sidebarItem p a{
+    text-decoration: none;
+    color: black;
+}
 .sidebarItem:hover{
     background-color: rgba(0, 0, 0, 0.04);
+    
 }
 
 .sidebarItem__arrow{

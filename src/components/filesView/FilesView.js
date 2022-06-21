@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import '../../styles/FilesView.css'
+import { ConnectContext } from '../../context/ConnectContext'
 
 import FileItem from './FileItem'
 import FileCard from './FileCard'
@@ -7,7 +8,27 @@ import FileCard from './FileCard'
 
 
 const FilesView = () => {
+    const {fetchPrivate} = useContext(ConnectContext);
     const [files, setFiles] = useState([])
+
+    // const fetch = async() => {
+    //     await fetchPrivate();
+    const fetch = async() => {
+        let result = await fetchPrivate();
+       setFiles(result)
+    
+    }
+    // }
+   useEffect(() => {
+
+   fetch()
+   
+   
+  
+  
+   },[fetchPrivate])
+
+useEffect(() => {console.log(files)},)
 
     // useEffect(() => {
     //     db.collection('myFiles').onSnapshot(snapshot => {
@@ -22,13 +43,15 @@ const FilesView = () => {
 
     return (
         <div className='fileView'>
+            {console.log(files)}
             <div className="fileView__row">
-                {
-                    files.slice(0, 5).map(({ id, item }) => (
-                        <FileCard name={item.caption} />
+                 {
+            
+                    files.slice(0, 5).map((item,index) => (
+                        <FileCard name={item.fileName} />
                     ))
 
-                }
+                } 
             </div>
             <div className="fileView__titles">
                 <div className="fileView__titles--left">
@@ -39,10 +62,15 @@ const FilesView = () => {
                     <p>File size</p>
                 </div>
             </div>
-            {
-                files.map(({ id, item }) => (
-                    <FileItem id={id} caption={item.caption} timestamp={item.timestamp} fileUrl={item.fileUrl} size={item.size} />
-                ))
+         
+            {files.map((item, index) => (
+                    <FileItem id={(item.fileId).toNumber()} caption={item.fileName} timestamp={(item.uploadTime).toNumber()} fileUrl={item.fileHash} size={item.fileSize} />
+                    
+                    ))
+            
+             
+                   
+                
             }
         </div>
     )

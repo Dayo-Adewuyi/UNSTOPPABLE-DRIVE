@@ -16,11 +16,12 @@ const index = () => {
             <NewFile />
 
             <div className="sidebar__itemsContainer">
-                <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Files'} />
-                <SidebarItem arrow icon={(<PublicSharpIcon/>)} label={'Public Files'} />
-                <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} />
-                <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} />
-                <SidebarItem icon={(<GavelSharpIcon />)} label={'Admins'} />
+                <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Files'} url={"my-files"}/>
+                <SidebarItem arrow icon={(<PublicSharpIcon/>)} label={'Public Files'} url={"public-files"}/>
+                <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} url={"shared"} />
+                <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} url={"recent"} />
+                <SidebarItem icon={(<GavelSharpIcon />)} label={'Admins'} url={"admin"} />
+                <SidebarItem icon={(<GavelSharpIcon />)} label={'Example'} url={"example"} />
                 
                 
                 <hr/>
