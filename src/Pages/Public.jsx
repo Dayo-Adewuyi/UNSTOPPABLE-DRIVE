@@ -1,9 +1,8 @@
 import React, { useState, useEffect , useContext} from 'react'
 import '../styles/FilesView.css'
-// import{ toast, ToastContainer } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+
 import { ConnectContext } from '../context/ConnectContext'
-import FileItem from '../components/filesView/FileItem'
+
 import PublicCard from '../components/filesView/PublicCard'
 
 
@@ -11,12 +10,12 @@ export default function Example() {
 
     const { fetchAll, shareFile, makePublic } = useContext(ConnectContext)
     const [files, setFiles] = useState([])
-    const [receivers, setReceivers] = useState([])
+    
     
 
     
     const fetch = async() =>{
-        const tx = await fetchAll()
+        const tx = await fetchPublic()
              setFiles(tx)
 
      }

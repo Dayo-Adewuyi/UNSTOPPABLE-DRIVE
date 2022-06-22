@@ -192,7 +192,7 @@ const checkModerator = async(addr) => {
  }
 }
 
-const add2Blacklist = async(addr) => {
+const blacklistUser = async(addr) => {
   const contract = createEthereumContract();
   
  try {
@@ -349,7 +349,7 @@ export const ConnectProvider = ({ children }) =>{
           remFrmBlacklist,
           currentAccount,
           connectWallet,
-          add2Blacklist,
+          blacklistUser,
           fetchPrivate,
           reportedList,
           fetchPublic,
