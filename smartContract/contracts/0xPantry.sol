@@ -86,7 +86,7 @@ contract OxPantry is Pausable {
 
     ///@notice Notification when a file is shared
     ///@dev Emit event when a file is shared
-    event sharedEvent(address share_to, address shared_by, string hash);
+    event sharedEvent(address share_to, address shared_by);
 
     /// @notice Notification when a file is reported
     /// @dev Emit event when a file is reported
@@ -140,6 +140,8 @@ contract OxPantry is Pausable {
         address sender;
         address receiver;
         string shared_hash;
+        string fileName;
+        string fileType;
     }
 
     /// @notice Function to upload a file
@@ -208,13 +210,11 @@ contract OxPantry is Pausable {
     }
 
     /// @notice Function to share a file
-    function shareFile(
-        uint _fileId,
-        address[] calldata _receivers,
-        string memory _hashed_file
-    ) public whenNotPaused isNotBlacklisted {
-        /// @dev Make sure the file hash exists
-        require(bytes(_hashed_file).length > 0);
+    function shareFile(uint _fileId, address[] calldata _receivers)
+        public
+        whenNotPaused
+        isNotBlacklisted
+    {
         /// @notice to check that the owner is the one transferring the files
         require(
             Allfiles[_fileId].uploader == msg.sender,
@@ -243,11 +243,13 @@ contract OxPantry is Pausable {
                 currentItemShared,
                 msg.sender,
                 _receivers[i],
-                _hashed_file
+                Allfiles[_fileId].fileHash,
+                Allfiles[_fileId].fileName,
+                Allfiles[_fileId].fileType
             );
             /// @notice Trigger an event when file is shared
             /// @param sharedEvent Name of emitted event
-            emit sharedEvent(_receivers[i], msg.sender, _hashed_file);
+            emit sharedEvent(_receivers[i], msg.sender);
         }
     }
 

@@ -262,11 +262,11 @@ const unPauseContract = async() => {
  }
 }
 
-const shareFile = async(id, beneficiaries, hash ) => {
+const shareFile = async(id, beneficiaries) => {
     const contract = createEthereumContract();
     
    try {
-     const  result =await contract.shareFile(id, beneficiaries, hash);
+     const  result =await contract.shareFile(id, beneficiaries);
     
     return result
     }

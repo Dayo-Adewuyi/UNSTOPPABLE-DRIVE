@@ -4,19 +4,16 @@ import '../styles/FilesView.css'
 // import 'react-toastify/dist/ReactToastify.css'
 import { ConnectContext } from '../context/ConnectContext'
 import FileItem from '../components/filesView/FileItem'
-import FileCard from '../components/filesView/FileCard'
+import SharedCard from '../components/filesView/SharedCard'
 
 
-export default function Example() {
+export default function Shared() {
 
-    const { fetchAll, shareFile, makePublic } = useContext(ConnectContext)
+    const { getSharedFiles } = useContext(ConnectContext)
     const [files, setFiles] = useState([])
-    const [receivers, setReceivers] = useState([])
-    
-
-    
+       
     const fetch = async() =>{
-        const tx = await fetchAll()
+        const tx = await getSharedFiles()
              setFiles(tx)
 
      }
@@ -30,7 +27,7 @@ export default function Example() {
                 {
                     files.map((element,index) => {
                         return(
-                            <FileCard key={index} id={element.fileId} name={element.fileName} hash={element.fileHash} type={element.fileType}/>
+                            <SharedCard key={index} address={element.sender} name={element.fileName} hash={element.shared_hash} type={element.fileType}/>
                         )})
                         
                 } 

@@ -14,7 +14,11 @@
     "ipfs-http-client": "54.0.1",
     "moment": "^2.29.3",
     "react": "^17.0.1",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-dom": "^17.0.1",
+    "react-else-if": "^1.0.5",
+    "react-iframe": "^1.8.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"

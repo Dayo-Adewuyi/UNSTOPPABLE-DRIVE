@@ -10,7 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
-import Condition,{If, Else, ElseIf} from 'react-else-if';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+
 
 
 function getModalStyle() {
@@ -32,14 +33,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const FileCard = ({ name, hash, id, type }) => {
-    const { makePublic, shareFile } = useContext(ConnectContext);
+const PublicCard = ({ name, hash, id, type }) => {
+    const { makePrivate, reportFile } = useContext(ConnectContext);
     const classes = useStyles();
     const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
-    const [beneficiary, setBeneficiary] = useState("");
-    const [beneficiaries, setBeneficiaries] = useState([]);
-    const [test, setTest] = useState()
+    
+    
   
     const handleOpen = () => {
         setOpen(true);
@@ -49,23 +49,16 @@ const FileCard = ({ name, hash, id, type }) => {
         setOpen(false);
     };
 
-    const handleClick = async() => {
-        await makePublic(id);
+   
+    
+    const handleReport = async() => {
+        await reportFile(id)
     }
-    const handleShare = async() => {
-       
-        await shareFile(id,beneficiaries);
-
+    
+    const handlePrivate = async() => {
+        await makePrivate(id)
     }
-    const handleChange = (e) => {
-        setBeneficiary(e.target.value);
-    }
-  
-    const addAddress = () =>{
-        setBeneficiaries([...beneficiaries, beneficiary]);
-        setBeneficiary("");
-    }
-
+    
   
     
     return (
@@ -89,20 +82,29 @@ const FileCard = ({ name, hash, id, type }) => {
 
             <div className="fileCard--bottom">
                 <p><a href={`https://ipfs.infura.io/ipfs/${hash}`} style={{textDecoration: 'none', color: 'black'}}>{name.slice(0,8)}</a></p> 
-                <div><span><ShareIcon style ={{ fontsize: 10 } } onClick={() => handleOpen()}/></span><span><PublicIcon style ={{ fontSize: 15, cursor : 'pointer',  }} onClick={() => handleClick()} /></span></div>    
+                <div><span><ShareIcon style ={{ fontsize: 10 } } onClick={() => handleOpen()}/></span><span><VisibilityOffIcon style ={{ fontSize: 15, cursor : 'pointer'}} onClick={() => handlePrivate()} /></span></div>    
             </div>
             <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-                <div style={modalStyle} className={classes.paper}>
-                    <input type="text" placeholder="insert address of beneficiaries" name="address" onChange={handleChange}/>
-                    <button onClick={()=>addAddress()} >Add Address</button><button onClick={()=>handleShare()} >Share</button>
-                    </div>
+             <div style={modalStyle} className={classes.paper}>
+                <Iframe url={"https://ipfs.infura.io/ipfs/"  + hash}
+                width="100%"
+                height="600px"
+                id="myId"
+                className="myClassname"
+                display="initial"
+                position="relative"/>
+          </div>
+          <button className="btn btn-small btn-primary me-1"><a href={"http://www.twitter.com/share?text=check out " + name + "&url=https://ipfs.infura.io/ipfs/" + hash} className="imp" data-action="share/whatsapp/share">Share File</a></button>
+          <button className="btn btn-small btn-success"><a href={"https://ipfs.infura.io/ipfs/" + hash} className="imp" download={name + "from UNSTOPPABLE DRIVE"} >Download File</a></button>
+          <button className="btn btn-small btn-warning me-1" onClick={()=>handleReport()}>Report File</button>
+          
             </Modal>
         </div>
     )
 }
 
-export default FileCard
+export default PublicCard

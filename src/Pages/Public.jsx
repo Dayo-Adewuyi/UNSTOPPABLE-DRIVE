@@ -4,7 +4,7 @@ import '../styles/FilesView.css'
 // import 'react-toastify/dist/ReactToastify.css'
 import { ConnectContext } from '../context/ConnectContext'
 import FileItem from '../components/filesView/FileItem'
-import FileCard from '../components/filesView/FileCard'
+import PublicCard from '../components/filesView/PublicCard'
 
 
 export default function Example() {
@@ -30,7 +30,7 @@ export default function Example() {
                 {
                     files.map((element,index) => {
                         return(
-                            <FileCard key={index} id={element.fileId} name={element.fileName} hash={element.fileHash} type={element.fileType}/>
+                            <PublicCard key={index} id={element.fileId} name={element.fileName} hash={element.fileHash} type={element.fileType}/>
                         )})
                         
                 } 

@@ -6,6 +6,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { ConnectContext } from "../../context/ConnectContext";
+import { useAlert } from 'react-alert'
+
  const ipfs = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 function getModalStyle() {
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NewFile = () => {
     const {uploads } = useContext(ConnectContext);
+    // const alert = useAlert()
     const classes = useStyles();
 
     const [modalStyle] = useState(getModalStyle);
@@ -79,7 +82,7 @@ const NewFile = () => {
             
             //setUrl(url)
             setFileUrl(url)
-           
+        //    alert.success("File successfully uploaded")
           
             setUploading(false)
           
