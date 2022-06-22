@@ -47,6 +47,16 @@ export default function Admin() {
             <button onClick={pauseContract}>Pause</button>
             <button onClick={unpauseContract}>Unpause</button>
          </div>
+
+         {
+            list.map((element,index) => {
+                return(
+                <div >
+                    <li key ={index}>{element}</li>
+                </div>
+                )
+            })
+         }
             
         </div>
     )
