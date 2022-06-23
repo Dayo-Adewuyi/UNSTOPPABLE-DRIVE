@@ -28,7 +28,7 @@ const FilesView = () => {
   
    },[fetchPrivate])
 
-useEffect(() => {console.log(files)},)
+useEffect(() => {console.log(files)},[files])
 
     
     
@@ -40,7 +40,7 @@ useEffect(() => {console.log(files)},)
                  {
             
                     files.slice(0, 5).map((item,index) => (
-                        <FileCard name={item.fileName} />
+                        <FileCard name={item.fileName} hash={item.fileHash} id={item.fileId} />
                     ))
 
                 } 

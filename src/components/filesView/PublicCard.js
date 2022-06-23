@@ -90,18 +90,19 @@ const PublicCard = ({ name, hash, id, type }) => {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
              <div style={modalStyle} className={classes.paper}>
-                <Iframe url={"https://ipfs.infura.io/ipfs/"  + hash}
+                <iframe  src={"https://ipfs.infura.io/ipfs/"  + hash}
                 width="100%"
                 height="600px"
                 id="myId"
                 className="myClassname"
                 display="initial"
-                position="relative"/>
-          </div>
+                position="relative"
+                title="test"/>
+          
           <button className="btn btn-small btn-primary me-1"><a href={"http://www.twitter.com/share?text=check out " + name + "&url=https://ipfs.infura.io/ipfs/" + hash} className="imp" data-action="share/whatsapp/share">Share File</a></button>
           <button className="btn btn-small btn-success"><a href={"https://ipfs.infura.io/ipfs/" + hash} className="imp" download={name + "from UNSTOPPABLE DRIVE"} >Download File</a></button>
           <button className="btn btn-small btn-warning me-1" onClick={()=>handleReport()}>Report File</button>
-          
+          </div>
             </Modal>
         </div>
     )

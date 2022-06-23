@@ -20,7 +20,7 @@ export default function Shared() {
  
      useEffect(() => {fetch()}, [files])
     
-     console.log(files)
+    
     return (
         <div className='fileView'>
             <div className="fileView__row">
