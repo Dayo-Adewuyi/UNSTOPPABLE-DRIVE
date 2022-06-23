@@ -15,6 +15,7 @@ export default function Admin() {
 
     const getList = async() =>{
         const tx = await reportedList()
+        console.log(tx)
         setList(tx)
     }
     const handleChange = (e) => {

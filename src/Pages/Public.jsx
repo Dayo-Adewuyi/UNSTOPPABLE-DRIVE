@@ -8,7 +8,7 @@ import PublicCard from '../components/filesView/PublicCard'
 
 export default function Example() {
 
-    const { fetchAll, shareFile, makePublic } = useContext(ConnectContext)
+    const { fetchPublic, shareFile, makePublic } = useContext(ConnectContext)
     const [files, setFiles] = useState([])
     
     
@@ -20,17 +20,19 @@ export default function Example() {
 
      }
  
-     useEffect(() => {fetch()}, [files])
+     useEffect(() => {fetch()
+        }, [files])
     
-     console.log(files)
+ 
+
     return (
         <div className='fileView'>
             <div className="fileView__row">
-                {
+                { files.length>0 ?
                     files.map((element,index) => {
                         return(
                             <PublicCard key={index} id={element.fileId} name={element.fileName} hash={element.fileHash} type={element.fileType}/>
-                        )})
+                        )}) :(<div>No Files</div>)
                         
                 } 
                 {/* <button onClick={fetch}>Fetch</button> */}
